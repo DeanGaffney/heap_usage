@@ -2,7 +2,6 @@ package controllers;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import models.WordPair;
@@ -13,8 +12,8 @@ public class FileData {
 	
 	public FileData(){} //blank constructor
 	
-	public List<WordPair> readFile()throws Exception{
-		List <WordPair> wordPairs = new ArrayList<WordPair>();
+	public ArrayList<WordPair> readFile()throws Exception{
+		ArrayList <WordPair> wordPairs = new ArrayList<WordPair>();
 		
 		Scanner input = new Scanner(new FileReader(wordFile)); // create a new file reader for our file
 		String line = "";
@@ -31,8 +30,8 @@ public class FileData {
 			}else throw new Exception ("Invalid member length" + words.length);
 		}
 		//for debug purposes
-		for(int i = 0; i < wordPairs.size();i++)
-			System.out.println(wordPairs.get(i));
+		/*for(int i = 0; i < wordPairs.size();i++)
+			System.out.println(wordPairs.get(i));*/
 		return wordPairs;
 	}
 }
