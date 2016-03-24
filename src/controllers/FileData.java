@@ -1,6 +1,10 @@
 package controllers;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,5 +37,12 @@ public class FileData {
 		/*for(int i = 0; i < wordPairs.size();i++)
 			System.out.println(wordPairs.get(i));*/
 		return wordPairs;
+	}
+	
+	public void saveFile(WordPair wordPair) throws IOException{
+		BufferedWriter out = new BufferedWriter(new FileWriter("data/SpanishWords.txt",true));
+		out.newLine();
+		out.write(wordPair.getSpanishWord() + "\t"+wordPair.getEnglishWord());
+		out.close();
 	}
 }

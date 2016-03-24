@@ -22,7 +22,7 @@ public class WordPair implements Comparable<WordPair> {
 		return englishWord;
 	}
 	
-	public String getSpanishword(){
+	public String getSpanishWord(){
 		return spanishWord;
 	}
 	

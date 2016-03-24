@@ -1,4 +1,5 @@
 package heap_usage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -7,9 +8,11 @@ import models.WordPair;
 public class MaxHeap {
 
 	private ArrayList <WordPair> maxHeap;
+	private FileData fileData;
+	private int heapTraversals = 0;
 
 	public MaxHeap() throws Exception{
-		FileData fileData = new FileData();
+		fileData = new FileData();
 		maxHeap = fileData.readFile();
 		Collections.sort(maxHeap,Collections.reverseOrder()); //sorts the list in descending order just like max heap
 		for(int i =0;i<maxHeap.size();i++){
@@ -67,21 +70,24 @@ public class MaxHeap {
 	}
 
 	public void findEnglishWord(String spanishWord,int rootNode){
+		heapTraversals++;
 		int left = rootNode * 2 + 1;
 		int right = rootNode * 2 + 2;
-		
-		if(maxHeap.get(rootNode).getSpanishword().equals(spanishWord)){
-			System.out.println("English translation: "+ maxHeap.get(rootNode).getEnglishWord()+"\n");
-			return ;
+
+		if(maxHeap.get(rootNode).getSpanishWord().equals(spanishWord)){
+			System.out.println("Heap Traversals:"+heapTraversals+"\n"+"English translation: "+ maxHeap.get(rootNode).getEnglishWord()+"\n");
+			heapTraversals = 0;
+			return;
 		}
 		if(left < maxHeap.size())findEnglishWord(spanishWord,left);
 		if(right < maxHeap.size())findEnglishWord(spanishWord, right);
 	}
 
-	public void add(WordPair wordpair){
+	public void add(WordPair wordPair) throws IOException{
 		//put it in last index and sift up comparing them.
-		maxHeap.add(wordpair);
+		maxHeap.add(wordPair);
 		//go through heap and arrange everything correctly.
+		fileData.saveFile(wordPair);
 		siftUp();
 	}
 
@@ -118,7 +124,10 @@ public class MaxHeap {
 	}
 
 	public void displayHeap(){
-		for(int i =0;i<maxHeap.size();i++)
-			System.out.println(maxHeap.get(i).toString());
+		if(maxHeap.isEmpty())System.out.println("Heap is Empty");
+		else{
+			for(int i =0;i<maxHeap.size();i++)
+				System.out.println(maxHeap.get(i).toString());
+		}
 	}
 }

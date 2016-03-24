@@ -1,4 +1,5 @@
 package main;
+import java.io.IOException;
 import java.util.Scanner;
 
 import heap_usage.MaxHeap;
@@ -32,12 +33,11 @@ public class Main {
 		System.out.println("6)Clear all elements from heap.");
 		System.out.println("7)Print out the heap.");
 		System.out.println("8)Search for English Translation.");
-		System.out.println("9)Save Dictionary to file.");
 		System.out.println();
 		System.out.println("0)To exit.");
 	}
 
-	private static void selectOption(int option) {
+	private static void selectOption(int option) throws IOException {
 		switch(option){
 		case 0:
 			System.out.println("Exiting......");
@@ -48,12 +48,10 @@ public class Main {
 			System.out.println("Please enter the English translation");
 			String englishWord = input.next();
 			maxHeap.add(new WordPair(spanishWord,englishWord));
-			System.out.println("\nUpdated Heap is:");
-			maxHeap.toString();
 			break;
 		case 2:
 			WordPair tempWordPair = new WordPair(maxHeap.removeMax());
-			tempWordPair.toString();
+			System.out.println(tempWordPair.toString());
 			break;
 		case 3:
 			System.out.println("Max item on heap is " + maxHeap.getMax());
@@ -72,7 +70,7 @@ public class Main {
 			maxHeap.displayHeap();
 			break;
 		case 8:
-			System.out.println("Please enter a spanish word you wish to get the English translation for.");
+			System.out.println("Please enter a english word you wish to get the spanish translation for.");
 			String wordToFind = input.next();
 			maxHeap.findEnglishWord(wordToFind,0);
 			break;
